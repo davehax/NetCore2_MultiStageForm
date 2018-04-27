@@ -1,0 +1,42 @@
+@model MultiStageForm.Models.Stagedform
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Stagedform</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentStage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CurrentStage)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stage1Navigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stage1Navigation.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stage2Navigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stage2Navigation.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stage3Navigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stage3Navigation.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

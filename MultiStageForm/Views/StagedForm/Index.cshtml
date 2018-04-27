@@ -1,0 +1,53 @@
+@model IEnumerable<MultiStageForm.Models.Stagedform>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CurrentStage)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stage1Navigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stage2Navigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stage3Navigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentStage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stage1Navigation.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stage2Navigation.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stage3Navigation.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

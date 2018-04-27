@@ -1,0 +1,1 @@
+﻿dotnet aspnet-codegenerator controller --controllerName StagedFormController --model Stagedform --dataContext MultiStageFormContext --useDefaultLayout --controllerNamespace MultiStageForm.Controllers --referenceScriptLibraries
