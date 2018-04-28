@@ -11,13 +11,14 @@ namespace MultiStageForm.Models
         public virtual DbSet<Stage3> Stage3 { get; set; }
         public virtual DbSet<Stagedform> Stagedform { get; set; }
 
-        // 
+        // This constructor is required the function call that add this class as a service
+        // in Startup.cs
         public MultiStageFormContext(DbContextOptions<MultiStageFormContext> options)
-            : base (options)
-        {}
+            : base(options) 
+        {
+            
+        }
 
-        // The following generated method will have it's guts moved to "Startup.cs"
-        // in order to conform with the standard asp.net Dependency Injection pattern
 //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //        {
 //            if (!optionsBuilder.IsConfigured)
@@ -77,19 +78,16 @@ namespace MultiStageForm.Models
                 entity.HasOne(d => d.Stage1Navigation)
                     .WithMany(p => p.Stagedform)
                     .HasForeignKey(d => d.Stage1)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_stage1");
 
                 entity.HasOne(d => d.Stage2Navigation)
                     .WithMany(p => p.Stagedform)
                     .HasForeignKey(d => d.Stage2)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_stage2");
 
                 entity.HasOne(d => d.Stage3Navigation)
                     .WithMany(p => p.Stagedform)
                     .HasForeignKey(d => d.Stage3)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_stage3");
             });
         }
