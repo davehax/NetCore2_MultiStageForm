@@ -10,29 +10,36 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Stage1" class="control-label"></label>
-                <select asp-for="Stage1" class ="form-control" asp-items="ViewBag.Stage1"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Stage2" class="control-label"></label>
-                <select asp-for="Stage2" class ="form-control" asp-items="ViewBag.Stage2"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Stage3" class="control-label"></label>
-                <select asp-for="Stage3" class ="form-control" asp-items="ViewBag.Stage3"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="CurrentStage" class="control-label"></label>
-                <input asp-for="CurrentStage" class="form-control" />
-                <span asp-validation-for="CurrentStage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
+        <div class="dh-form-container">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <!--<div class="form-group">
+                    <label asp-for="Stage1" class="control-label"></label>
+                    <select asp-for="Stage1" class ="form-control" asp-items="ViewBag.Stage1"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Stage2" class="control-label"></label>
+                    <select asp-for="Stage2" class ="form-control" asp-items="ViewBag.Stage2"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Stage3" class="control-label"></label>
+                    <select asp-for="Stage3" class ="form-control" asp-items="ViewBag.Stage3"></select>
+                </div>-->
+                @Html.HiddenFor(model => model.Stage1)
+                @Html.HiddenFor(model => model.Stage2)
+                @Html.HiddenFor(model => model.Stage3)
+                @Html.HiddenFor(model => model.CurrentStage)
+                <!--<div class="form-group">
+                    <label asp-for="CurrentStage" class="control-label"></label>
+                    <input asp-for="CurrentStage" class="form-control" />
+                    <span asp-validation-for="CurrentStage" class="text-danger"></span>
+                </div>-->
+                <div class="form-group">
+                    <input type="submit" value="Start new Multi Stage form!" class="btn btn-default" />
+                </div>
+
+            </form>
+        </div>
     </div>
 </div>
 

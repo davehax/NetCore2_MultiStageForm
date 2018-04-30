@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MultiStageForm.Models;
+using MultiStageForm.Workflow;
 
 namespace MultiStageForm.Controllers
 {
@@ -77,6 +78,18 @@ namespace MultiStageForm.Controllers
             {
                 return NotFound();
             }
+
+            var stagedform = await _context.Stagedform.SingleOrDefaultAsync(s => s.Stage2 == stage2.Id);
+            if (stagedform == null)
+            {
+                //return NotFound();
+                // Potentially return NotFound...
+            }
+            else
+            {
+                ViewData["Stagedform"] = stagedform;
+            }
+
             return View(stage2);
         }
 
@@ -98,6 +111,10 @@ namespace MultiStageForm.Controllers
                 {
                     _context.Update(stage2);
                     await _context.SaveChangesAsync();
+
+                    // Update the form to the third stage
+                    MultiStageFormWorkflow multiStageFormWorkflow = new MultiStageFormWorkflow(_context);
+                    await multiStageFormWorkflow.MoveFormToStage(stage2, MultiStageFormStages.Third);
                 }
                 catch (DbUpdateConcurrencyException)
                 {

@@ -26,6 +26,16 @@
     margin: 15px
 }
 
+/* Davehax CSS */
+.dh-form-container {
+    display: block;
+    box-sizing: border-box;
+    padding: 20px 30px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */

@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model MultiStageForm.Models.Stagedform
+@using MultiStageForm.Workflow
+@using System.Collections.Generic
+
+@{
+    var btnClasses = new Dictionary<int, string>();
+    btnClasses[(int)MultiStageFormStages.First] = "btn btn-default";
+    btnClasses[(int)MultiStageFormStages.Second] = "btn btn-default";
+    btnClasses[(int)MultiStageFormStages.Third] = "btn btn-default";
+    btnClasses[(int)Model.CurrentStage] += " btn-primary";
+
+    for (int i = (int)Model.CurrentStage + 1; i < (int)MultiStageFormStages.Finished; i++)
+    {
+        if (btnClasses[i] != null)
+        {
+            btnClasses[i] += " disabled";
+        }
+    }
+}
+
+<div class="btn-group" role="group">
+    <a asp-controller="Stage1" asp-action="Edit" asp-route-id="@Model.Stage1" class="@btnClasses[(int)MultiStageFormStages.First]">First</a>
+    <a asp-controller="Stage2" asp-action="Edit" asp-route-id="@Model.Stage2" class="@btnClasses[(int)MultiStageFormStages.Second]">Second</a>
+    <a asp-controller="Stage3" asp-action="Edit" asp-route-id="@Model.Stage3" class="@btnClasses[(int)MultiStageFormStages.Third]">Third</a>
+</div>
+<p>&nbsp;</p>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MultiStageForm.Models;
+using MultiStageForm.Workflow;
 
 namespace MultiStageForm.Controllers
 {
@@ -49,9 +50,9 @@ namespace MultiStageForm.Controllers
         // GET: StagedForm/Create
         public IActionResult Create()
         {
-            ViewData["Stage1"] = new SelectList(_context.Stage1, "Id", "Name");
-            ViewData["Stage2"] = new SelectList(_context.Stage2, "Id", "Description");
-            ViewData["Stage3"] = new SelectList(_context.Stage3, "Id", "Id");
+            //ViewData["Stage1"] = new SelectList(_context.Stage1, "Id", "Name");
+            //ViewData["Stage2"] = new SelectList(_context.Stage2, "Id", "Description");
+            //ViewData["Stage3"] = new SelectList(_context.Stage3, "Id", "Id");
             return View();
         }
 
@@ -64,8 +65,13 @@ namespace MultiStageForm.Controllers
         {
             if (ModelState.IsValid)
             {
+                MultiStageFormWorkflow multiStageFormWorkflow = new MultiStageFormWorkflow(_context);
+
                 _context.Add(stagedform);
                 await _context.SaveChangesAsync();
+
+                await multiStageFormWorkflow.OnMultiStageFormCreate(stagedform);
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Stage1"] = new SelectList(_context.Stage1, "Id", "Name", stagedform.Stage1);

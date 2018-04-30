@@ -20,4 +20,7 @@
   <ItemGroup>
     <Compile Remove="MultiStageFormContext.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Workflow\" />
+  </ItemGroup>
 </Project>

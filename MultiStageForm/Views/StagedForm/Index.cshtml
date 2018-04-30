@@ -1,4 +1,5 @@
 @model IEnumerable<MultiStageForm.Models.Stagedform>
+@using MultiStageForm.Workflow;
 
 @{
     ViewData["Title"] = "Index";
@@ -43,7 +44,23 @@
                 @Html.DisplayFor(modelItem => item.Stage3Navigation.Id)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+<!--                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |-->
+                @if (item.CurrentStage == (int)MultiStageFormStages.First)
+                {
+                    <a asp-controller="Stage1" asp-action="Edit" asp-route-id="@item.Stage1">Edit</a>
+                }
+
+                @if (item.CurrentStage == (int)MultiStageFormStages.Second)
+                {
+                    <a asp-controller="Stage2" asp-action="Edit" asp-route-id="@item.Stage2">Edit</a>
+                }
+
+                @if (item.CurrentStage == (int)MultiStageFormStages.Third)
+                {
+                    <a asp-controller="Stage3" asp-action="Edit" asp-route-id="@item.Stage3">Edit</a>
+                }
+
+                |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
